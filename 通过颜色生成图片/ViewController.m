@@ -16,12 +16,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 100, 200, 200)];
+    imgView.image = [self createImageWithColor:[UIColor purpleColor] andSize:CGSizeMake(imgView.frame.size.width, imgView.frame.size.height)];
+    [self.view addSubview:imgView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//需要手动设置图片的大小
+-(UIImage*)createImageWithColor:(UIColor*)color andSize:(CGSize)size{
+    
+    CGRect rect=CGRectMake(0.0f,0.0f,size.width,size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context=UIGraphicsGetCurrentContext();CGContextSetFillColorWithColor(context, [color CGColor]);
+    
+    CGContextFillRect(context, rect);
+    
+    UIImage * theImage=UIGraphicsGetImageFromCurrentImageContext();UIGraphicsEndImageContext();
+    
+    return theImage;
+    
 }
-
 @end
